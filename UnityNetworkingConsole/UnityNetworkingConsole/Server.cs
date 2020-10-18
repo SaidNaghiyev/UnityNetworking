@@ -18,7 +18,20 @@ namespace UnityNetworkingConsole
             MaxPlayer = _maxPlayer;
             Port = _port;
 
+            Console.WriteLine("Starting server...");
+
             tcpListener = new TcpListener(IPAddress.Any, Port);
+            tcpListener.Start();
+            tcpListener.BeginAcceptTcpClient(new AsyncCallback(TCPConnectCallback), null);
+
+            Console.WriteLine($"Server started on{Port}.");
+        }
+
+        private static void TCPConnectCallback(IAsyncResult _result)
+        {
+            TcpClient _client = tcpListener.EndAcceptTcpClient(_result);
+            tcpListener.BeginAcceptTcpClient(new AsyncCallback(TCPConnectCallback), null);
+
         }
 
     }
