@@ -6,7 +6,8 @@ namespace UnityNetworkingConsole
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            Console.Title = "Game Server";
+            Console.ReadKey();
         }
     }
 }
